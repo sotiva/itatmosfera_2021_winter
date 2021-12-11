@@ -10,30 +10,29 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 
 
-# The training data folder must be passed as first argument
+# Папка с обучающими данными должна быть передана в качестве первого аргумента
 languages_data_folder = sys.argv[1]
-dataset = load_files(languages_data_folder)
-
-# Split the dataset in training and test set:
+набор данных = load_files(папка languages_data_folder)
+# Разделить набор данных в наборе для обучения и тестирования:
 docs_train, docs_test, y_train, y_test = train_test_split(
-    dataset.data, dataset.target, test_size=0.5)
+dataset.данные, dataset.цель, test_size=0,5)
 
 
-# TASK: Build a vectorizer that splits strings into sequence of 1 to 3
-# characters instead of word tokens
+# ЗАДАЧА: Создайте векторизатор, который разбивает строки на последовательности от 1 до 3
+# символы вместо словесных знаков
 
-# TASK: Build a vectorizer / classifier pipeline using the previous analyzer
-# the pipeline instance should stored in a variable named clf
+# ЗАДАЧА: Построить конвейер векторизатора/классификатора с использованием предыдущего анализатора
+# экземпляр конвейера должен храниться в переменной с именем clf
 
-# TASK: Fit the pipeline on the training set
+# ЗАДАЧА: Разместить конвейер на обучающем наборе
 
-# TASK: Predict the outcome on the testing set in a variable named y_predicted
+# ЗАДАЧА: Предсказать результат тестирования, заданный в переменной с именем y_predicted
 
-# Print the classification report
+# Распечатать отчет о классификации
 print(metrics.classification_report(y_test, y_predicted,
                                     target_names=dataset.target_names))
 
-# Plot the confusion matrix
+# Построить матрицу 
 cm = metrics.confusion_matrix(y_test, y_predicted)
 print(cm)
 
@@ -41,7 +40,7 @@ print(cm)
 #plt.matshow(cm, cmap=plt.cm.jet)
 #plt.show()
 
-# Predict the result on some short new sentences:
+# Предсказать результат по нескольким коротким новым предложениям:
 sentences = [
     'This is a language detection test.',
     'Ceci est un test de d\xe9tection de la langue.',

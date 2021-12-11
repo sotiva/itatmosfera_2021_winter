@@ -1,0 +1,51 @@
+"""Постройте модель анализа настроений/полярности
+Анализ настроений можно представить как задачу классификации двоичного текста,
+то есть подбора линейного классификатора по признакам, извлеченным из текста
+пользовательских сообщений, чтобы угадать, является ли мнение автора
+положительным или отрицательным.
+В этом примере мы будем использовать набор данных для просмотра фильмов.
+
+import sys
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
+from sklearn.datasets import load_files
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+
+
+if __name__ == "__main__":
+   # папка с обучающими данными должна быть передана в качестве первого аргумента
+    movie_reviews_data_folder = sys.argv[1]
+    dataset = load_files(movie_reviews_data_folder, shuffle=False)
+    print("n_samples: %d" % len(dataset.data))
+
+   # разделить набор данных на обучающий и тестовый набор:
+    docs_train, docs_test, y_train, y_test = train_test_split(
+        dataset.data, dataset.target, test_size=0.25, random_state=None)
+
+    # ЗАДАЧА: Построить конвейер векторизатора/классификатора, который отфильтровывает токены
+# которые слишком редки или слишком часты
+
+   # ЗАДАЧА: Создайте поиск по сетке, чтобы выяснить, являются ли униграммы или биграммы
+# более полезный.
+# Установите конвейер на обучающий набор, используя поиск параметров по сетке
+
+# ЗАДАЧА: выведите результаты перекрестной проверки для каждого набора параметров
+# исследовано с помощью поиска по сетке
+
+# ЗАДАЧА: Предсказать результат набора тестов и сохранить его в переменной
+#с именем y_предуказанный
+
+# Распечатать отчет о классификации
+    print(metrics.classification_report(y_test, y_predicted,
+                                        target_names=dataset.target_names))
+
+    # Print and plot the confusion matrix
+    cm = metrics.confusion_matrix(y_test, y_predicted)
+    print(cm)
+
+    # import matplotlib.pyplot as plt
+    # plt.matshow(cm)
+    # plt.show()
